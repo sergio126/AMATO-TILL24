@@ -87,9 +87,12 @@ rifSoff = .85;
 rifPav = .3;
 \end{code}
 
-Dato che il riverberp utilizza un'architettura Comb-AllPass, avente quindi diversi valori di g e di t
+Dato che il riverbero utilizza un'architettura Comb-AllPass, avente quindi diversi valori di g e di t
 per i vari comb, calcoliamo i coefficenti utilizzando le variabili descritte prima.
 
+\bigskip
+
+Tempi:
 \begin{code}
 t1 = ((z*altezza)/velSuono);
 t6 = (((1 - z)*altezza)/velSuono);
@@ -102,3 +105,34 @@ ts = (t1, t6, t2, t3, t4, t5);
 tsa1 = (t1,t2,t4);
 tsa2 = (t6,t3,t5);
 \end{code}
+
+Gain
+\begin{code}
+gs1 = z*rifPav ; 
+gs6 = (1 - z)*rifSoff ;
+gs2 = x*rifLat;
+gs3 = (1 - x)*rifLat;
+gs4 = y*rifFro ;
+gs5 = (1 - y)*rifFro ;
+
+gs=(gs1,gs6,gs2,gs3,gs4,gs5);
+gsa1=(gs1,gs2,gs4);
+gsa2=(gs6,gs3,gs5);
+\end{code}
+
+I valori di g e t sono stati divisi a loro volta in 2 liste separate in modo tale da gestire
+il segnale tra 2 canali ed avere un minimo di spazializzazione.
+
+Il risultato finale è
+
+\begin{code}
+process = _,_<:((_<:*(1-g)+(_<: par(i,3,dfldf(ba.take(i+1,tsa1),g,ba.take(i+1,gsa1))) :> 
+seq(i,2,apfo(2,T, g)))/2) ,(_<:*(1-g)+(_<: par(i,3,dfldf(ba.take(i+1,tsa2),g,ba.take(i+1,gsa2))) :> 
+seq(i,2,apfo(2,T, g)))/2) ) ;
+\end{code}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=1\textwidth]{atmoverb}
+\label{fig:atmoverb}
+\end{figure}

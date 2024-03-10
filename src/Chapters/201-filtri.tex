@@ -52,6 +52,9 @@ dove con $st$ indichiamo la frequenza di taglio.
 \label{fig:lp}
 \end{figure}
 
+Questo filtro, sarà utile in seguito, nella parte dedicata all'implementazione, in quanto 
+usato per simulare l'abbattimento alle alte frequenze dovuto all'umidità dell'aria
+
 \subsection{High-Pass}
 
 Permette l’attenuazione delle frequenze inferiori alla frequenza di taglio.
@@ -152,9 +155,9 @@ H(z)=\frac{(A_0 + A_1 * z^{-1})} {(1-B_1 * z^{-1})}
 \label{fig:fir}
 \end{figure}
 
-\todo[inline]{tutto ciò che segue, dove analizzi filtri che poi non utilizzi nella
-tesi non serve assolutamente a niente. puoi lasciare il filtro passa basso se lo
-spieghi per gli usi che ne farai dopo nella riverberazione. }
+% \todo[inline]{tutto ciò che segue, dove analizzi filtri che poi non utilizzi nella
+% tesi non serve assolutamente a niente. puoi lasciare il filtro passa basso se lo
+% spieghi per gli usi che ne farai dopo nella riverberazione. }
 
 
 

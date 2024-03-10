@@ -90,11 +90,11 @@ possano:
 \includegraphics[width=0.80\textwidth]{Code/msapfdwp-svg/dflda-0x600001c847e0.pdf}
 \caption{dfla: unità comb contenente un all-pass}
 \label{fig:dfla}
-\end{figure}
+\end{figure}{}{}
 
 \subsection{Algoritmi Combinati}
 
-Come già visto nel Capitolo 3, \todo{rifare puntatore al paragrafo corretto}
+Come già visto nel capitolo \ref{chp:Brevi storie di riverberi}, 
 queste unità riverberanti, prese singolarmente, non risultano particolaremente
 efficaci dal punto di vista della densità. Il passo successivo è quindi quello
 di crare delle reti di riverberatori combinando queste unità fondamentali.
@@ -116,9 +116,9 @@ realistica e gradevole.
 
 \lstinputlisting{Code/msapfcomb.dsp}
 
-\todo[inline]{dovresti scrivere che il capovolgimento del flusso di elaborazione del
-segnale non produce comportamenti differenti ed il riverbero calcolato è identico.
-il sistema capovolto permette però la generazione di un segnale polifonico}
+% \todo[inline]{dovresti scrivere che il capovolgimento del flusso di elaborazione del
+% segnale non produce comportamenti differenti ed il riverbero calcolato è identico.
+% il sistema capovolto permette però la generazione di un segnale polifonico}
 
 \begin{figure}[htp]
 \centering
@@ -126,3 +126,9 @@ il sistema capovolto permette però la generazione di un segnale polifonico}
 \caption{Modello capovolto}
 \label{fig:msapfcomb}
 \end{figure}
+
+Questo capovolgimento dell'algoritmo, come illustrato da \ms, non comporta alcun
+comportamento differente rispetto all'originale ma, permette la generazione di un segnale
+polifonico, che può essere indirizzato verso output distanti nello spazio e rendere
+l'ascolto diversificato per ogni canale d'uscita. Questo approccio, chiamato \emph{Ambiphonic}
+renderebbe l'ascolto più immersivo e realistico all'aumentare dei canali d'uscita.

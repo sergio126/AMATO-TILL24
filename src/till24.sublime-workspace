@@ -72,11 +72,11 @@
 			],
 			[
 				"Packages/LaTeXTools/LaTeX.sublime-build",
-				""
+				"Basic Builder - PdfLaTeX"
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Basic Builder - PdfLaTeX",
 	"command_palette":
 	{
 		"height": 0.0,
@@ -121,22 +121,26 @@
 	"expanded_folders":
 	[
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24",
-		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/doc",
-		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/faust",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src",
-		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/FrontBackMatter"
 	],
 	"file_history":
 	[
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/Conclusioni.tex",
-		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/102-acustica.tex",
-		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/FrontBackMatter/Acknowledgements.tex",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/000-introduzione.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Code/velSuono.dsp",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/204-atmoverb.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/100-storia.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/102-acustica.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/202-schroeder.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Bibliography.bib",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/201-filtri.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/200-implementazione.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/203-moorer.tex",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Code/atmoverb.dsp",
+		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/FrontBackMatter/Acknowledgements.tex",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/tesi.tex",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/101-sabine.tex",
-		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/100-storia.tex",
-		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Bibliography.bib",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/gsriverberi.bib",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/storia.tex",
 		"/C/Users/Sergio/Documents/GitHub/AMATO-TILL24/src/Chapters/Introduzione.tex",

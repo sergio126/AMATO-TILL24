@@ -9,40 +9,35 @@ Gli algoritmi di base utilizzati saranno i medesimi implementati in precedenza:
 \emph{Comb} con \emph{Low-Pass} (figura \ref{fig:amcombfir}) e
 \emph{All-Pass lattice} (figura \ref{fig:amapfo})
 
-I parametri di controllo Temperatura, Pressione, Umidità, Gas
+I parametri di controllo Temperatura, Pressione, Gas
 
-\begin{code}
-atm = hslider("Pressure", 1, 0.1, 10, .1);
-press = 76 * (atm);
-temp = hslider("Temperature", 20, -200, 200, .1);
-stp = (1.2930, 0.7710, 1.2507, 3.2170, 1.9760, 0.0899, 0.7170, 1.2500,1.4290, 0.804);
-dens = (ba.take(1,stp)*press)/(press * (1 + (0.00367* (temp))));
-velSuono = sqrt((1.402*atm*(1.013*10^5))/dens);
-\end{code}
+\lstinputlisting{Code/velsuono.dsp}
 
-\todo{mancano i commenti e manca un process che faccia capire a cosa serve il
-      codice. il senso di avere i blocchi separati viene meno se non funzionano
-      autonomi e se non ci sono i commenti}
+
+% \todo{mancano i commenti e manca un process che faccia capire a cosa serve il
+%       codice. il senso di avere i blocchi separati viene meno se non funzionano
+%       autonomi e se non ci sono i commenti}
 
 Viene così definita la velocità del suono che in seguto influenza i tempi di
 Delay dei vari Comb, in base alla posizione del suono nello spazio.
 
 \begin{code}
-x = hslider("x",.5,.1,.99,.001);
-y = hslider("y",.5,.1,.99,.001);
-z = hslider("z",.15,.1,.99,.001);
+//Posizione
 
-Dim = hslider("Room Dimension",1,1,100,.1);
-
-altezza = 3*Dim;
-larg = 3*Dim;
-lung = 6*Dim;
+xpos = hslider("[06]x[unit:]",50,0,100,1)/100;
+ypos = hslider("[07]y[unit:]",50,0,100,1)/100;
+zpos = hslider("[08]z[unit:]",10,0,100,1)/100;
 \end{code}
 
-\todo{idem}
+Le variabili xpos, ypos, zpos servono per identidficare il punto di origine dell'evento sonoro;
+Larghezza, lunghezza e altezza definiscono le dimensioni dello spazio riverberante.
 
-Le variabili x, y, z servono per identidficare il punto di origine dell'evento sonoro, scalate
-per Dim in modo da rendere variabile la dimensione della stanza.
+\begin{code}
+larghezza = hslider("[03]Larghezza[unit:mt]", 10,1,100,1);
+lunghezza = hslider("[04]Lunghezza[unit:mt]", 10,1,100,1);
+altezza = hslider("[05]Altezza[unit:mt]", 10,1,100,1);
+\end{code}
+
 
 I coefficenti di assorbimento delle pareti sono stati inseriti anch'essi, in quanto sappiamo
 avere una certa influenza sul risultato sonoro. I valori sono compresi tra 0
@@ -51,6 +46,8 @@ arbitrariamente per simulare una sala da concerto (il pavimento è il valore pi�
 l'influenza delle sedute).
 
 \begin{code}
+//Assorbimento Pareti
+
 rifLat = .8;
 rifFro = .5;
 rifSoff = .85;
@@ -63,48 +60,23 @@ per i vari comb, calcoliamo i coefficenti utilizzando le variabili descritte pri
 \bigskip
 
 Tempi:
-\begin{code}
-t1 = ((z*altezza)/velSuono);
-t6 = (((1 - z)*altezza)/velSuono);
-t2 = ((x*larg)/velSuono);
-t3 = (((1 - x)*larg)/velSuono);
-t4 = ((y*lung)/velSuono);
-t5 = (((1 - x)*lung)/velSuono);
 
-ts = (t1, t6, t2, t3, t4, t5);
-tsa1 = (t1,t2,t4);
-tsa2 = (t6,t3,t5);
-\end{code}
+\lstinputlisting{Code/combtimes.dsp}
 
-Gain
-\begin{code}
-gs1 = z*rifPav ;
-gs6 = (1 - z)*rifSoff ;
-gs2 = x*rifLat;
-gs3 = (1 - x)*rifLat;
-gs4 = y*rifFro ;
-gs5 = (1 - y)*rifFro ;
+Gain:
 
-gs=(gs1,gs6,gs2,gs3,gs4,gs5);
-gsa1=(gs1,gs2,gs4);
-gsa2=(gs6,gs3,gs5);
-\end{code}
+\lstinputlisting{Code/combg.dsp}
 
-I valori di g e t sono stati divisi a loro volta in 2 liste separate in modo tale da gestire
-il segnale tra 2 canali ed avere un minimo di spazializzazione.
+\pagebreak
 
-Il risultato finale è
+Il risultato finale è poi inserito in una matrice mid/side, per sommare le componenti spaziali
+e decodificato in seguito left/right per poterlo ascoltare in fase di test.
 
-\begin{code}
-process = _,_<:((_<:*(1-g)+(_<: par(i,3,dfldf(ba.take(i+1,tsa1),g,ba.take(i+1,gsa1))) :>
-seq(i,2,apfo(2,T, g)))/2) ,(_<:*(1-g)+(_<: par(i,3,dfldf(ba.take(i+1,tsa2),g,ba.take(i+1,gsa2))) :>
-seq(i,2,apfo(2,T, g)))/2) ) ;
-\end{code}
+\lstinputlisting{Code/atmoverbprocess.dsp}
+
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=1\textwidth]{atmoverb}
+\includegraphics[width=1\textwidth]{atmoverb1}
 \label{fig:atmoverb}
 \end{figure}
-
-\todo[inline]{il codice preso a blocchi e rimesso insieme in un process non funziona. non so cosa fare e come aiutarti}
